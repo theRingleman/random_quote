@@ -8,7 +8,7 @@ function getQuote(event) {
       quote = response.quoteText;
       author = response.quoteAuthor;
       appendQuote(quote, author);
-      setTweet(quote);
+      setTweet(quote, author);
     }, "jsonp");
   });
 }
@@ -21,8 +21,13 @@ function appendQuote(quote, author) {
   $(".quote").append("<p>" + quote + " - " + author + "</p>");
 }
 
-function setTweet(quote) {
-  $("#tweet-link").attr("href", "http://twitter.com/home/?status=" + quote);
+function setTweet(quote, author) {
+  var renderedQuote = quote + " - " + author;
+  if (renderedQuote.length <= 140) {
+    $("#tweet-link").attr("href", "http://twitter.com/home/?status=" + renderedQuote);
+  } else {
+    alert("Sorry but the quote is too long.");
+  }
 }
 
 $(document).ready(function () {
