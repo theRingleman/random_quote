@@ -26,7 +26,10 @@ function setTweet(quote, author) {
   if (renderedQuote.length <= 140) {
     $("#tweet-link").attr("href", "http://twitter.com/home/?status=" + renderedQuote);
   } else {
-    alert("Sorry but the quote is too long.");
+    $("#tweet-link").on("click", function (event) {
+      event.preventDefault();
+      alert("Sorry but the quote is too long.");
+    });
   }
 }
 
